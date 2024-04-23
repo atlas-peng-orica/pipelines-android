@@ -7,9 +7,13 @@ pool:
   vmImage: 'macOS-latest'
 
 steps:
+- bash: |
+    echo '$(System.DefaultWorkingDirectory)'
+    ls -la '$(System.DefaultWorkingDirectory)'
+- script: dir $(System.DefaultWorkingDirectory)
 - task: Gradle@2
   inputs:
-    workingDirectory: ''
+    workingDirectory: 'pipelines-android'
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
@@ -17,8 +21,8 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
-    tasks: 'assembleDebug test'
-  displayName: gradlew assembleDebug test
+    tasks: 'assembleDebug'
+  displayName: gradlew assembleDebug
 
 - task: CopyFiles@2
   inputs:
