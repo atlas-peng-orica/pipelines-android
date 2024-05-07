@@ -10,6 +10,10 @@ steps:
 - bash: |
     echo '$(System.DefaultWorkingDirectory)'
     ls -la '$(System.DefaultWorkingDirectory)'
+    echo "Check Java version"
+    java_version-$(java --version)
+    echo "Done Java version: $java_version"
+
     
 - task: Gradle@2
   inputs:
@@ -20,7 +24,6 @@ steps:
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
   displayName: gradlew assembleDebug
 
