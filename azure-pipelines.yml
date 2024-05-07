@@ -12,15 +12,15 @@ steps:
     versionSpec: '11'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'PreInstalled'
-  bash: |
-    echo "Check Java version"
-    java_version-$(java --version)
-    echo "Done Java version: $java_version"
-
+    
 - bash: |
     echo '$(System.DefaultWorkingDirectory)'
     ls -la '$(System.DefaultWorkingDirectory)'
- 
+    echo "Check Java version"
+    java --version
+    echo "Done Java version"
+
+    
 - task: Gradle@2
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
